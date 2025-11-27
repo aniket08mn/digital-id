@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student ID Card</title>
+  <style>
+    body {
+      background: #f5f5f5;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .id-card {
+      background: white;
+      border-radius: 15px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      padding: 20px;
+    }
+    .id-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #3f51b5;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    .id-card h2 {
+      margin: 5px 0;
+    }
+    .id-card p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="id-card">
+    <img id="profile" src="" alt="Profile">
+    <h2 id="name"></h2>
+    <p><b>Course:</b> <span id="course"></span></p>
+    <p><b>Roll No:</b> <span id="roll"></span></p>
+    <p><b>Phone:</b> <span id="phone"></span></p>
+    <p><b>Email:</b> <span id="email"></span></p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('name').textContent = params.get('name');
+    document.getElementById('course').textContent = params.get('course');
+    document.getElementById('roll').textContent = params.get('roll');
+    document.getElementById('phone').textContent = params.get('phone');
+    document.getElementById('email').textContent = params.get('email');
+
+    const profileImage = localStorage.getItem('profileImage');
+    document.getElementById('profile').src = profileImage || 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png';
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator</title>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f3e5f5;
+      font-family: 'Poppins', sans-serif;
+    }
+    #qrcode {
+      margin: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #6a1b9a;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #4a148c;
+    }
+  </style>
+</head>
+<body>
+  <h2>Scan This QR to View Student ID Card</h2>
+  <div id="qrcode"></div>
+  <button onclick="window.history.back()">← Back</button>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    const course = params.get('course');
+    const roll = params.get('roll');
+    const phone = params.get('phone');
+    const email = params.get('email');
+
+    const idUrl = `${window.location.origin}/card.html?name=${encodeURIComponent(name)}&course=${encodeURIComponent(course)}&roll=${encodeURIComponent(roll)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}`;
+
+    new QRCode(document.getElementById("qrcode"), {
+      text: idUrl,
+      width: 200,
+      height: 200
+    });
+  </script>
+</body>
+</html>
