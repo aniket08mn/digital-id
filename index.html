@@ -62,29 +62,31 @@
   </div>
 
   <script>
-    const profileInput = document.getElementById('profile-photo');
-    const profilePreview = document.getElementById('profile-preview');
+    let profileBase64 = "";
 
-    profileInput.addEventListener('change', () => {
-      const file = profileInput.files[0];
+    document.getElementById("profile-photo").addEventListener("change", () => {
+      const file = document.getElementById("profile-photo").files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          profilePreview.src = e.target.result;
-          localStorage.setItem('profileImage', e.target.result);
+          profileBase64 = e.target.result;
+          document.getElementById("profile-preview").src = profileBase64;
         };
         reader.readAsDataURL(file);
       }
     });
 
-    document.getElementById('generate').addEventListener('click', () => {
+    document.getElementById("generate").addEventListener("click", () => {
       const name = document.getElementById('name').value;
       const course = document.getElementById('course').value;
       const roll = document.getElementById('roll').value;
       const phone = document.getElementById('phone').value;
       const email = document.getElementById('email').value;
 
-      const params = new URLSearchParams({ name, course, roll, phone, email });
+      const params = new URLSearchParams({ 
+        name, course, roll, phone, email, photo: profileBase64 
+      });
+
       window.location.href = `qrcode.html?${params.toString()}`;
     });
   </script>
